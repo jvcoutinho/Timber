@@ -1,73 +1,77 @@
-/***********************
- *  Carregando texturas. 
- ***********************/
+function start() {
+    loadTextures();
+    handleInput();
+    setGameVariables();
+}
 
-// Árvore principal.
-var mainTreeImage = loadTexture("images/tree.png");
-var mainTreeSprite = loadSprite(mainTreeImage, 200, 600);
-mainTreeImage.onload = function() {
-    mainTreeSprite.render(canvas.width/2, 0);
-};
-
-// Jogador.
-var playerImage = loadTexture("images/player.png");
-var playerSprite = loadSprite(playerImage, 150, 192);
-playerImage.onload = function() {
-    playerSprite.render(canvas.width/2 - 150, 420);
-};
-
-// Machado.
-var axeImage = loadTexture("images/axe.png");
-var axeSprite = loadSprite(axeImage, 152, 28);
-axeImage.onload = function() {
-    axeSprite.render(canvas.width/2 - 280, 530);
-};
-
-// Galhos.
-const NUM_GALHOS = 6;
-var branchImage = loadTexture("images/branch.png");
-var branchSprites = [];
-for (let index = 0; index < NUM_GALHOS; index++)
-    branchSprites.push(loadSprite(branchImage, -2000, -2000));
-
-
-/********************
- * Variáveis de jogo.
- ********************/
-var playerSideEnum = Object.freeze({"LEFT": 1, "RIGHT": 2});
-
-
-/**********************
- * Controle da entrada.
- **********************/
-var acceptInput = false;
-document.addEventListener("keydown", e => {
-
-    if(acceptInput) {
-        let key = e.which || e.keyCode;
-        switch (key) {
-            case 39: // ->
-                // Atualizando posição do lenhador.
-                updatePosition(playerSprite, canvas.width/2 - 150, 420, canvas.width/2 + 205, 420);
-
-                // Atualizando posição do machado.
-                updatePosition(axeSprite, canvas.width/2 - 280, 530, canvas.width/2 + 205, 535);
-                break;
-            
-            case 37: // <-
-                updatePosition(playerSprite, canvas.width/2 + 205, 420, canvas.width/2 - 150, 420);
-                updatePosition(axeSprite, canvas.width/2 + 205, 535, canvas.width/2 - 280, 530);
-                break;
-            default:
-                break;
-        }
-    }
-    acceptInput = false;
+/**
+ * Carregar texturas.
+ */
+function loadTextures() {
     
-});
+    // Árvore principal.
+    mainTreeSprite = loadSprite("images/tree.png", 200, 600, canvas.width / 2 - 100, 0);
 
-function updatePosition(sprite, oldX, oldY, newX, newY) {
-    context.clearRect(oldX, oldY, sprite.width, sprite.height);
-    sprite.render(newX, newY);
+    // Jogador.
+    playerPositionXLEFT = mainTreeSprite.initialPosition.x - 200;
+    playerPositionXRIGHT = mainTreeSprite.initialPosition.x + 250;
+    playerSprite = loadSprite("images/player.png", 150, 192, playerPositionXLEFT, 410);
+
+    // Machado.
+    axePositionXLEFT = playerSprite.initialPosition.x + 100;
+    axePositionXRIGHT = playerSprite.initialPosition.x + 330;
+    axeSprite = loadSprite("images/axe.png", 152, 28, axePositionXLEFT, 525);
+
+    // Galhos.
+    const NUM_GALHOS = 6;
+    var branchImage = loadTexture("images/branch.png");
+    var branchSprites = [];
+    for (let index = 0; index < NUM_GALHOS; index++)
+        branchSprites.push(loadSprite(branchImage, -2000, -2000));
+}
+
+/**
+ * Lidar com a entrada, inicialmente pelas setas do teclado.
+ */
+function handleInput() {
+    document.addEventListener("keydown", e => {
+
+        if(acceptInput) {
+            let key = e.which || e.keyCode;
+
+            // Atualizando posições.
+            switch (key) {
+                
+                case 39: // ->
+                    playerSprite.updatePosition(playerPositionXRIGHT, playerSprite.currentPosition.y);
+                    axeSprite.updatePosition(axePositionXRIGHT, axeSprite.currentPosition.y);
+                    break;
+
+                case 37: // <-
+                    playerSprite.updatePosition(playerPositionXLEFT, playerSprite.currentPosition.y);
+                    axeSprite.updatePosition(axePositionXLEFT, axeSprite.currentPosition.y);
+                    break;
+
+                default:
+                    break;
+
+            }
+
+            acceptInput = false;
+        }
+        
+    });
+
+
+    document.addEventListener("keyup", e => {
+        axeSprite.updatePosition(2000, axeSprite.currentPosition.y); 
+    })
+}
+
+/**
+ * Setar as variáveis do jogo.
+ */
+function setGameVariables() {
+    playerSideEnum = Object.freeze({"LEFT": 1, "RIGHT": 2});
 }
 

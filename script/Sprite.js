@@ -1,22 +1,27 @@
+function loadSprite(image, width, height, positionX, positionY) {
+
+    var sprite = createSprite({
+        context: context, 
+        width: width,
+        height: height,
+        image: loadTexture(image),
+        initialPositionX: positionX,
+        initialPositionY: positionY
+    });
+
+    sprite.image.onload = function() {
+        sprite.render(positionX, positionY);
+    };
+
+    return sprite;
+} 
+
 function loadTexture(path) {
     var image = new Image();
     image.src = path;
 
     return image;
 }
-
-function loadSprite(image, width, height) {
-
-    var sprite = createSprite({
-        context: context, 
-        width: width,
-        height: height,
-        image: image
-    });
-
-    return sprite;
-} 
-
 
 function createSprite (options) {
 
@@ -26,6 +31,14 @@ function createSprite (options) {
     sprite.width = options.width;
     sprite.height = options.height;
     sprite.image = options.image;
+    sprite.initialPosition = {
+        x: options.initialPositionX,
+        y: options.initialPositionY 
+    };
+    sprite.currentPosition = {
+        x: options.initialPositionX,
+        y: options.initialPositionY 
+    };
 
     sprite.render = function(x, y) {
 
@@ -41,7 +54,17 @@ function createSprite (options) {
             sprite.height // Altura da imagem.
         );
 
+        sprite.currentPosition = {
+            x: x, 
+            y: y
+        }
+
     };
+
+    sprite.updatePosition = function(x, y) {
+        sprite.context.clearRect(sprite.currentPosition.x, sprite.currentPosition.y, sprite.width, sprite.height);
+        sprite.render(x, y);
+    }
 
     return sprite;
 }
