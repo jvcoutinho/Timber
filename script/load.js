@@ -5,7 +5,7 @@ function loadTexture(path) {
     return image;
 }
 
-function loadSprite(image, width, height, posx, posy) {
+function loadSprite(image, width, height) {
 
     var sprite = createSprite({
         context: context, 
