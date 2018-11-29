@@ -23,6 +23,13 @@ axeImage.onload = function() {
     axeSprite.render(canvas.width/2 - 280, 530);
 };
 
+// Galhos.
+const NUM_GALHOS = 6;
+var branchImage = loadTexture("images/branch.png");
+var branchSprites = [];
+for (let index = 0; index < NUM_GALHOS; index++)
+    branchSprites.push(loadSprite(branchImage, -2000, -2000));
+
 
 /********************
  * Variáveis de jogo.
@@ -35,6 +42,7 @@ var playerSideEnum = Object.freeze({"LEFT": 1, "RIGHT": 2});
  **********************/
 var acceptInput = false;
 document.addEventListener("keydown", e => {
+
     if(acceptInput) {
         let key = e.which || e.keyCode;
         switch (key) {
@@ -47,10 +55,7 @@ document.addEventListener("keydown", e => {
                 break;
             
             case 37: // <-
-                // Atualizando posição do lenhador.
                 updatePosition(playerSprite, canvas.width/2 + 205, 420, canvas.width/2 - 150, 420);
-
-                // Atualizando posição do machado.
                 updatePosition(axeSprite, canvas.width/2 + 205, 535, canvas.width/2 - 280, 530);
                 break;
             default:
@@ -58,6 +63,7 @@ document.addEventListener("keydown", e => {
         }
     }
     acceptInput = false;
+    
 });
 
 function updatePosition(sprite, oldX, oldY, newX, newY) {
