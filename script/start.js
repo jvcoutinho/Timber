@@ -45,11 +45,13 @@ function handleInput() {
                 case 39: // ->
                     playerSprite.updatePosition(playerPositionXRIGHT, playerSprite.currentPosition.y);
                     axeSprite.updatePosition(axePositionXRIGHT, axeSprite.currentPosition.y);
+                    timeRemaining += 150;
                     break;
 
                 case 37: // <-
                     playerSprite.updatePosition(playerPositionXLEFT, playerSprite.currentPosition.y);
                     axeSprite.updatePosition(axePositionXLEFT, axeSprite.currentPosition.y);
+                    timeRemaining += 150;
                     break;
 
                 default:
@@ -73,5 +75,12 @@ function handleInput() {
  */
 function setGameVariables() {
     playerSideEnum = Object.freeze({"LEFT": 1, "RIGHT": 2});
+
+    // Tempo.
+    timeBarStartDimensions = {width: 400, height: 30};
+    timeRemaining = 6000.0; //seconds;
+    timeDecreaseSpeed = timeBarStartDimensions.width / timeRemaining;
+    currentTime = Date.now();
+
 }
 
