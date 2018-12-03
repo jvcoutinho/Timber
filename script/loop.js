@@ -1,12 +1,17 @@
 function loop() {
 
-    timeRemaining -= (Date.now() - currentTime);
-    currentTime = Date.now();
-    //console.log(timeRemaining);
-    restartSetup();
-    draw();
-    
-    requestAnimationFrame(loop);
+    if(!gameOver) {
+
+        timeRemaining -= (Date.now() - currentTime);
+        if(timeRemaining <= 0)
+            gameOver = true;
+        currentTime = Date.now();
+        //console.log(timeRemaining);
+        restartSetup();
+        draw();
+        
+        requestAnimationFrame(loop);
+    }
 }
 
 function restartSetup() {

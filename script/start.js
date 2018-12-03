@@ -82,5 +82,8 @@ function setGameVariables() {
     timeDecreaseSpeed = timeBarStartDimensions.width / timeRemaining;
     currentTime = Date.now();
 
+    // Fluxo de jogo.
+    gameOver = false;
+
 }
 
