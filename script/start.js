@@ -1,4 +1,7 @@
+console.log("Entrou no arquivo do start");
+
 function start() {
+    console.log("Entrou no Start");
     loadTextures();
     handleInput();
     setGameVariables();
@@ -25,9 +28,9 @@ function loadTextures() {
     // Galhos.
     const NUM_GALHOS = 6;
     var branchImage = loadTexture("images/branch.png");
-    var branchSprites = [];
+    branchPositions = [];
     for (let index = 0; index < NUM_GALHOS; index++)
-        branchSprites.push(loadSprite(branchImage, -2000, -2000));
+    branchPositions.push(loadSprite(branchImage, -2000, -2000));
 }
 
 /**
@@ -74,4 +77,6 @@ function handleInput() {
 function setGameVariables() {
     playerSideEnum = Object.freeze({"LEFT": 1, "RIGHT": 2});
 }
+
+
 
