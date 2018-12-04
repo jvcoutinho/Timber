@@ -73,6 +73,9 @@ function handleInput() {
 
     document.addEventListener("keyup", e => {
         axeSprite.updatePosition(2000, axeSprite.currentPosition.y); 
+        //juliano: O ideal talvez fosse que colocasse o ganho aqui, quando ele para de pressionar a tecla.
+        //juliano: Acredito que é aqui que fica todas as funcoes de atualizar o galho, assim, como ta atualizando ai
+        //juliano: a posicao do machado.
     })
 }
 
@@ -80,7 +83,8 @@ function handleInput() {
  * Setar as variáveis do jogo.
  */
 function setGameVariables() {
-    playerSideEnum = Object.freeze({"LEFT": 1, "RIGHT": 2});
+    playerSideEnum = Object.freeze({"LEFT": 1, "RIGHT": 2});//Juliano: Tem que ver aqui como vai ser essa captura, se vai ser pelo rotulo 
+                                                            //"LEFT e RIGHT la no switche, no caso como strings, ou se coloca lá a saida pra 1 e 2...
 }
 
 
