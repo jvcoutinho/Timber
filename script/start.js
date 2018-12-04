@@ -10,7 +10,7 @@ function start() {
 function loadTextures() {
     
     // Árvore principal.
-    mainTreeSprite = loadSprite("images/tree.png", 200, canvas.height/2 + 250, canvas.width / 2 - 100, 0);
+    mainTreeSprite = loadSprite("images/tree.png", canvas.width/10, canvas.height/2 + 250, canvas.width / 2 - 100, 0);
 
     // Jogador.
     playerPositionXLEFT = mainTreeSprite.initialPosition.x - 200;
