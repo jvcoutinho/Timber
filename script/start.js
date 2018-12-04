@@ -28,9 +28,13 @@ function loadTextures() {
     // Galhos.
     const NUM_GALHOS = 6;
     var branchImage = loadTexture("images/branch.png");
+    branchPositionXLEFT = playerSprite.initialPosition.x + 100;
+    branchPositionXRIGHT = playerSprite.initialPosition.x + 100;
     branchPositions = [];
     for (let index = 0; index < NUM_GALHOS; index++)
     branchPositions.push(loadSprite(branchImage, -2000, -2000));
+    //Juliano: branchImage é pra ser url da image, justo?
+    
 }
 
 /**
