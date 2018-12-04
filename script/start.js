@@ -18,9 +18,9 @@ function loadTextures() {
     playerSprite = loadSprite("images/player.png", 150, 192, playerPositionXLEFT, canvas.height/2 + 50);
 
     // Machado.
-    axePositionXLEFT = playerSprite.initialPosition.x + 100;
-    axePositionXRIGHT = playerSprite.initialPosition.x + 330;
-    axeSprite = loadSprite("images/axe.png", 152, 28, axePositionXLEFT, 525);
+    axePositionXLEFT = playerSprite.initialPosition.x + 120;
+    axePositionXRIGHT = playerSprite.initialPosition.x + 320;
+    axeSprite = loadSprite("images/axe.png", 152, 28, axePositionXLEFT, canvas.height/2 + 150);
 
     // Galhos.
     const NUM_GALHOS = 6;
