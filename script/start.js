@@ -38,8 +38,10 @@ function loadTextures() {
  */
 function handleInput() {
     document.addEventListener("keydown", e => {
+        
 
         if(acceptInput) {
+           //juliano : Ou chamaria updateBranches aqui? Toda vez q ele pressionasse. 
             let key = e.which || e.keyCode;
 
             // Atualizando posições.
@@ -48,13 +50,13 @@ function handleInput() {
                 case 39: // ->
                     playerSprite.updatePosition(playerPositionXRIGHT, playerSprite.currentPosition.y);
                     axeSprite.updatePosition(axePositionXRIGHT, axeSprite.currentPosition.y);
-                   //juliano : chamaria updateBranches aqui? Toda vez q ele pressionasse. 
+                   //juliano :Ou chamaria updateBranches aqui? Toda vez q ele pressionasse. 
                     break;
 
                 case 37: // <-
                     playerSprite.updatePosition(playerPositionXLEFT, playerSprite.currentPosition.y);
                     axeSprite.updatePosition(axePositionXLEFT, axeSprite.currentPosition.y);
-                    //juliano : chamaria updateBranches aqui? Toda vez q ele pressionasse.
+                    //juliano : Ou chamaria updateBranches aqui? Toda vez q ele pressionasse.
                     break;
 
                 default:
