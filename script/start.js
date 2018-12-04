@@ -15,7 +15,7 @@ function loadTextures() {
     // Jogador.
     playerPositionXLEFT = mainTreeSprite.initialPosition.x - 200;
     playerPositionXRIGHT = mainTreeSprite.initialPosition.x + 250;
-    playerSprite = loadSprite("images/player.png", 150, 192, playerPositionXLEFT, 410);
+    playerSprite = loadSprite("images/player.png", 150, 192, playerPositionXLEFT, canvas.height/2 + 50);
 
     // Machado.
     axePositionXLEFT = playerSprite.initialPosition.x + 100;
