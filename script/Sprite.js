@@ -70,7 +70,7 @@ function createSprite (options) {
 }
 
 function updateBranches() {
-
+    NUM_BRANCHES = 6 //ja existe uma var chamada assim em outro arquivo.
     console.log("Entrou no updateBranches");
     for (j = NUM_BRANCHES - 1; j > 0; j--)
 	{
@@ -84,11 +84,11 @@ function updateBranches() {
 	switch (r)
         {
         case 0:
-            branchPositions[0] = LEFT;
+            branchPositions[0] = "LEFT";
             break;
 
         case 1:
-            branchPositions[0] = RIGHT;
+            branchPositions[0] = "RIGHT";
             break;
                
         default:
