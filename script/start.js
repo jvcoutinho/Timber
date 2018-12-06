@@ -10,17 +10,17 @@ function start() {
 function loadTextures() {
     
     // Árvore principal.
-    mainTreeSprite = loadSprite("images/tree.png", 200, 600, canvas.width / 2 - 100, 0);
+    mainTreeSprite = loadSprite("images/tree.png", canvas.width/10, canvas.height/2 + 250, canvas.width / 2 - 100, 0);
 
     // Jogador.
     playerPositionXLEFT = mainTreeSprite.initialPosition.x - 200;
     playerPositionXRIGHT = mainTreeSprite.initialPosition.x + 250;
-    playerSprite = loadSprite("images/player.png", 150, 192, playerPositionXLEFT, 410);
+    playerSprite = loadSprite("images/player.png", 150, 192, playerPositionXLEFT, canvas.height/2 + 50);
 
     // Machado.
-    axePositionXLEFT = playerSprite.initialPosition.x + 100;
-    axePositionXRIGHT = playerSprite.initialPosition.x + 330;
-    axeSprite = loadSprite("images/axe.png", 152, 28, axePositionXLEFT, 525);
+    axePositionXLEFT = playerSprite.initialPosition.x + 120;
+    axePositionXRIGHT = playerSprite.initialPosition.x + 320;
+    axeSprite = loadSprite("images/axe.png", 152, 28, axePositionXLEFT, canvas.height/2 + 150);
 
     // Galhos.
     const NUM_GALHOS = 6;
