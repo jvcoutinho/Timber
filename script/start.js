@@ -10,27 +10,28 @@ function start() {
 function loadTextures() {
     
     // Árvore principal.
-    mainTreeSprite = loadSprite("images/tree.png", canvas.width/10, canvas.height/2 + 250, canvas.width / 2 - 100, 0);
+    mainTreeSprite = loadSprite("images/tree.png", 300, 900, canvas.width / 2 - 100, 140);
+    mainTreeSpriteReplicate = loadSprite("images/tree.png", 300, 900, canvas.width / 2 - 100, 0);
 
     // Jogador.
-    playerPositionXLEFT = mainTreeSprite.initialPosition.x - 200;
-    playerPositionXRIGHT = mainTreeSprite.initialPosition.x + 200;
-    playerSprite = loadSprite("images/player.png", 150, 192, playerPositionXLEFT, canvas.height/2 + 50);
+    playerPositionXLEFT = mainTreeSprite.initialPosition.x - 100;
+    playerPositionXRIGHT = mainTreeSprite.initialPosition.x + 180;
+    playerSprite = loadSprite("images/player.png", 150, 192, playerPositionXLEFT, canvas.height/2 + 140);
 
     // Machado.
-    axePositionXLEFT = playerSprite.initialPosition.x + 120;
-    axePositionXRIGHT = playerSprite.initialPosition.x + 270;
-    axeSprite = loadSprite("images/axe.png", 152, 28, axePositionXLEFT, canvas.height/2 + 160);
+    axePositionXLEFT = playerSprite.initialPosition.x + 60;
+    axePositionXRIGHT = playerSprite.initialPosition.x + 220;
+    axeSprite = loadSprite("images/axe.png", 152, 28, axePositionXLEFT, canvas.height/2 + 195);
 
     // Galhos.
     NUM_GALHOS = 6;
     branchPositionXLEFT = mainTreeSprite.initialPosition.x;
-    branchPositionXRIGHT = mainTreeSprite.initialPosition.x + 137;
+    branchPositionXRIGHT = mainTreeSprite.initialPosition.x + 144;
     branchSprites = [];
     branchPositions = [];
     for (let index = 0; index < NUM_GALHOS; index++) {
-        branchSprites.push(loadSprite("images/branch.png", 440, 80, -2000, -2000));
-        branchPositions.push(-2000);
+        branchSprites.push(loadSprite("images/branch.png", 440, 80, 2000, -2000));
+        branchPositions.push(2000);
     }
         
 }
@@ -41,21 +42,23 @@ function loadTextures() {
 function handleInput() {
     document.addEventListener("keydown", e => {
 
-        if(acceptInput) {
+        if(acceptInput && !gameOver) {
             let key = e.which || e.keyCode;
 
             // Atualizando posições.
             switch (key) {
                 
                 case 39: // ->
-                    playerSprite.updatePosition(playerPositionXRIGHT, playerSprite.currentPosition.y);
+                    playerSide = sideEnum.RIGHT;
+                    // playerSprite.updatePosition(playerPositionXRIGHT, playerSprite.currentPosition.y);
                     axeSprite.updatePosition(axePositionXRIGHT, axeSprite.currentPosition.y);
                     updateBranchPositions();
                     timeRemaining += 150;
                     break;
 
                 case 37: // <-
-                    playerSprite.updatePosition(playerPositionXLEFT, playerSprite.currentPosition.y);
+                    playerSide = sideEnum.LEFT;
+                    // playerSprite.updatePosition(playerPositionXLEFT, playerSprite.currentPosition.y);
                     axeSprite.updatePosition(axePositionXLEFT, axeSprite.currentPosition.y);
                     updateBranchPositions();
                     timeRemaining += 150;
@@ -81,7 +84,8 @@ function handleInput() {
  * Setar as variáveis do jogo.
  */
 function setGameVariables() {
-    playerSideEnum = Object.freeze({"LEFT": 1, "RIGHT": 2});
+    sideEnum = Object.freeze({"LEFT": 1, "RIGHT": 2, "NONE": 3});
+    playerSide = sideEnum.LEFT;
 
     // Tempo.
     timeBarStartDimensions = {width: 400, height: 30};
@@ -103,12 +107,12 @@ function updateBranchPositions() {
     let position = Math.floor(Math.random() * 5);
     switch(position) {
         case 0:
-            branchPositions[0] = branchPositionXLEFT;
+            branchPositions[0] = sideEnum.LEFT;
             break;
         case 1:
-            branchPositions[0] = branchPositionXRIGHT;
+            branchPositions[0] = sideEnum.RIGHT;
             break;
         default:
-            branchPositions[0] = -2000;
+            branchPositions[0] = sideEnum.NONE;
     }
 }

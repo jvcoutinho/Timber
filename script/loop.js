@@ -7,11 +7,21 @@ function loop() {
             gameOver = true;
         currentTime = Date.now();
         //console.log(timeRemaining);
-        restartSetup();
-        draw();
+
+
+        // Esmagado.
+         if(branchPositions[NUM_GALHOS - 1] === playerSide) {
+            branchPositions[NUM_GALHOS - 1] = sideEnum.NONE;
+            gameOver = true;
+         }
+             
+
+    } else {
         
-        requestAnimationFrame(loop);
     }
+    restartSetup();
+    draw();
+    requestAnimationFrame(loop);
 }
 
 function restartSetup() {
@@ -19,12 +29,14 @@ function restartSetup() {
 }
 
 function draw() {
+    context.clearRect(0, 0, canvas.width, canvas.height);
+    drawPlayer();
     mainTreeSprite.render(mainTreeSprite.currentPosition.x, mainTreeSprite.currentPosition.y);
+    mainTreeSpriteReplicate.render(mainTreeSpriteReplicate.initialPosition.x, mainTreeSpriteReplicate.initialPosition.y);
     drawBranches();
-    playerSprite.render(playerSprite.currentPosition.x, playerSprite.currentPosition.y);
     axeSprite.render(axeSprite.currentPosition.x, axeSprite.currentPosition.y);
     drawTimeBar();
-}
+ }
 
 function drawTimeBar() {
     context.fillStyle = "red"
@@ -35,18 +47,23 @@ function drawTimeBar() {
 }
 
 function drawBranches() {
-    for(let i = 0; i < NUM_GALHOS; i++) {
-        
-        if(branchPositions[i] === branchPositionXLEFT) {
+    
+    for(let i = 0; i < NUM_GALHOS; i++) {    
+        if(branchPositions[i] === sideEnum.LEFT) {
             branchSprites[i].context.save();
             branchSprites[i].context.translate(branchPositionXLEFT + branchSprites[i].width, branchSprites[i].currentPosition.y + branchSprites[i].height);
             branchSprites[i].context.rotate(Math.PI);
             branchSprites[i].context.translate(-branchPositionXLEFT + branchSprites[i].width, -branchSprites[i].currentPosition.y + branchSprites[i].height);
-            branchSprites[i].render(branchPositionXLEFT, i * 150);
+            branchSprites[i].render(branchPositionXLEFT, (i - 1) * 150);
             branchSprites[i].context.restore();
-        } else
-            branchSprites[i].render(branchPositions[i], i * 150);
-            
-       
+        } else if(branchPositions[i] === sideEnum.RIGHT)
+            branchSprites[i].render(branchPositionXRIGHT, (i - 1) * 150);
     }
+}
+
+function drawPlayer() {
+    if(playerSide === sideEnum.LEFT)
+        playerSprite.render(playerPositionXLEFT, playerSprite.currentPosition.y);
+    else if(playerSide === sideEnum.RIGHT)
+        playerSprite.render(playerPositionXRIGHT, playerSprite.currentPosition.y);
 }
