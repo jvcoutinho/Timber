@@ -24,18 +24,12 @@ function loadTextures() {
     axeSprite = loadSprite("images/axe.png", 152, 28, axePositionXLEFT, canvas.height/2 + 195);
 
     // Galhos.
-    NUM_GALHOS = 6;
     branchPositionXLEFT = mainTreeSprite.initialPosition.x;
     branchPositionXRIGHT = mainTreeSprite.initialPosition.x + 144;
     branchSprites = [];
     branchPositions = [];
-    for (let index = 0; index < NUM_GALHOS; index++) {
-        branchSprites.push(loadSprite("images/branch.png", 440, 80, 2000, -2000));
-        branchPositions.push(2000);
-    }
-        
+    visibleBranches = [];
 }
-
 /**
  * Lidar com a entrada, inicialmente pelas setas do teclado.
  */
@@ -52,7 +46,6 @@ function handleInput() {
                     playerSide = sideEnum.RIGHT;
                     // playerSprite.updatePosition(playerPositionXRIGHT, playerSprite.currentPosition.y);
                     axeSprite.updatePosition(axePositionXRIGHT, axeSprite.currentPosition.y);
-                    updateBranchPositions();
                     timeRemaining += 150;
                     break;
 
@@ -60,7 +53,6 @@ function handleInput() {
                     playerSide = sideEnum.LEFT;
                     // playerSprite.updatePosition(playerPositionXLEFT, playerSprite.currentPosition.y);
                     axeSprite.updatePosition(axePositionXLEFT, axeSprite.currentPosition.y);
-                    updateBranchPositions();
                     timeRemaining += 150;
                     break;
 
@@ -94,27 +86,33 @@ function setGameVariables() {
     currentTime = Date.now();
     elapsedTime = 0;
     index = 0;
+    index2 = 0;
 
     // Fluxo de jogo.
     gameOver = true;
 
 }
 
-function updateBranchPositions() {
-    // Mover todos os galhos uma posição abaixo.
-    for (let i = NUM_GALHOS - 1; i > 0; i--) 
-        branchPositions[i] = branchPositions[i - 1];
-    
-    // Surgir um novo galho na posição 0.
-    let position = Math.floor(Math.random() * 5);
-    switch(position) {
-        case 0:
-            branchPositions[0] = sideEnum.LEFT;
-            break;
-        case 1:
-            branchPositions[0] = sideEnum.RIGHT;
-            break;
-        default:
-            branchPositions[0] = sideEnum.NONE;
+/**
+ * Criar galhos de acordo com a batida da música.
+ * @param {beats} Batidas 
+ */
+ready = false;
+function createBranchPositions(beats, tempo) {
+    ready = false;
+    for (let i = 0; i < beats.length; i++) {
+        branchSprites.push(loadSprite("images/branch.png", 440, 80, 2000, 0));
+        let position = Math.floor(Math.random() * 2);   
+        switch(position) {
+            case 0:
+                branchPositions.push({side: sideEnum.LEFT, time: tempo * (i + 1)});
+                break;
+            case 1:
+                branchPositions.push({side: sideEnum.RIGHT, time: tempo * (i + 1)});
+                break;
+            default:
+                branchPositions.push({side: sideEnum.NONE, time: tempo * (i + 1)});
+        }
     }
+    ready = true;    
 }

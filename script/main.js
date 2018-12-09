@@ -22,4 +22,5 @@ function resize() {
 window.addEventListener('load', resize, false);
 window.addEventListener('resize', resize, false);
 start();
+loadMusic('044m5wI5SDOeJpFwmr69nI');
 setTimeout(loop, 60);
