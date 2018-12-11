@@ -1,8 +1,33 @@
+/**
+ * Global Sound Variables to be loaded later
+ */
+var axe_sound;
+var gameover_sound;
+
 function start() {
+    loadSound();
     loadTextures();
     handleInput();
     setGameVariables();
 }
+
+/**
+ * Carregar Arquivos de Som
+ */
+
+ function loadSound(){
+     // load game sound files with Howler.js
+      axe_sound = new Howl({
+        src: ['sound/chop2.wav'],
+        volume: 1
+      });
+
+      gameover_sound = new Howl({
+        src: ['sound/fail.wav'],
+        volume: 1
+      });
+
+ }
 
 /**
  * Carregar texturas.
@@ -50,6 +75,7 @@ function handleInput() {
                     axeSprite.updatePosition(axePositionXRIGHT, axeSprite.currentPosition.y);
                     timeRemaining += (beat) ? 1000 : 150;
                     timeRemaining = Math.min(timeRemaining, INITIAL_TIME);
+                    axe_sound.play();
                     break;
 
                 case 37: // <-
@@ -58,10 +84,12 @@ function handleInput() {
                     axeSprite.updatePosition(axePositionXLEFT, axeSprite.currentPosition.y);
                     timeRemaining += (beat) ? 1000 : 150;
                     timeRemaining = Math.min(timeRemaining, INITIAL_TIME);
+                    axe_sound.play();
                     break;
 
                 default:
                     break;
+                    
 
             }
 

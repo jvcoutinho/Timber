@@ -38,6 +38,7 @@ function loop() {
         //  if(branchPositions[NUM_GALHOS - 1] === playerSide) {
         //     branchPositions[NUM_GALHOS - 1] = sideEnum.NONE;
         //     gameOver = true;
+        //      gameover_sound.play()
         //  }
             
     } else {
