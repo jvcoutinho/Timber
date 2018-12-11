@@ -29,6 +29,8 @@ function loadTextures() {
     branchSprites = [];
     branchPositions = [];
     visibleBranches = [];
+    visibleBranchesIndex = 0;
+    
 }
 /**
  * Lidar com a entrada, inicialmente pelas setas do teclado.
@@ -46,14 +48,16 @@ function handleInput() {
                     playerSide = sideEnum.RIGHT;
                     // playerSprite.updatePosition(playerPositionXRIGHT, playerSprite.currentPosition.y);
                     axeSprite.updatePosition(axePositionXRIGHT, axeSprite.currentPosition.y);
-                    timeRemaining += 150;
+                    timeRemaining += (beat) ? 1000 : 150;
+                    timeRemaining = Math.min(timeRemaining, INITIAL_TIME);
                     break;
 
                 case 37: // <-
                     playerSide = sideEnum.LEFT;
                     // playerSprite.updatePosition(playerPositionXLEFT, playerSprite.currentPosition.y);
                     axeSprite.updatePosition(axePositionXLEFT, axeSprite.currentPosition.y);
-                    timeRemaining += 150;
+                    timeRemaining += (beat) ? 1000 : 150;
+                    timeRemaining = Math.min(timeRemaining, INITIAL_TIME);
                     break;
 
                 default:
@@ -67,7 +71,7 @@ function handleInput() {
     });
 
 
-    document.addEventListener("keyup", e => {
+    document.addEventListener("keyup", () => {
         axeSprite.updatePosition(2000, axeSprite.currentPosition.y); 
     })
 }
@@ -80,16 +84,19 @@ function setGameVariables() {
     playerSide = sideEnum.LEFT;
 
     // Tempo.
+    INITIAL_TIME = 2000.0;
     timeBarStartDimensions = {width: 400, height: 30};
-    timeRemaining = 6000.0; //seconds;
+    timeRemaining = INITIAL_TIME; //milisseconds;
     timeDecreaseSpeed = timeBarStartDimensions.width / timeRemaining;
     currentTime = Date.now();
     elapsedTime = 0;
+    tempoTime = 0;
     index = 0;
     index2 = 0;
 
     // Fluxo de jogo.
     gameOver = true;
+    beat = true;
 
 }
 

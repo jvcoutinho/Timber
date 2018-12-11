@@ -2,20 +2,32 @@ function loop() {
 
     if(!gameOver) {
 
-        timeRemaining -= (Date.now() - currentTime);
-        elapsedTime += (Date.now() - currentTime);
+        timeInterval = (Date.now() - currentTime);
+        timeRemaining -= timeInterval;
+        elapsedTime += timeInterval;
+        tempoTime += timeInterval / 1000;
 
-        //console.log(elapsedTime);
-        // if(timeRemaining <= 0)
-        //     gameOver = true;
-        currentTime = Date.now();
-        //console.log(timeRemaining);
+        // Condição de perda 1: tempo esgotado.
+        if(timeRemaining <= 0)
+            gameOver = true;
 
-        //console.log(index, )
-        if(index < beats.length && beats[index] <= elapsedTime / 1000) {
+        // Changing beats.
+        if(index < beats.length && beats[index].start <= elapsedTime / 1000) 
             index++;
-            playerSide = (playerSide === sideEnum.LEFT) ? sideEnum.RIGHT : sideEnum.LEFT;
+        
+        // 
+        if(tempoTime >= tempo - 0.1 && tempoTime <= tempo + 0.1) {
+            beat = true;
+           // console.log(true);
+        } else if(tempoTime > tempo + 0.1) {
+            beat = false;
+            tempoTime = 0;
+            //console.log(false);
         }
+        
+        currentTime = Date.now();
+
+        
 
         if(index2 <= branchPositions.length && branchPositions[index2].time <= elapsedTime / 1000) {
             index2++;
@@ -27,8 +39,7 @@ function loop() {
         //     branchPositions[NUM_GALHOS - 1] = sideEnum.NONE;
         //     gameOver = true;
         //  }
-             
-
+            
     } else {
         currentTime = Date.now();
     }
@@ -61,17 +72,25 @@ function drawTimeBar() {
 
 function drawBranches() {
     
-    if(ready) {
-        for(let i = 0; i < visibleBranches.length; i++) {
-            if(visibleBranches[i].position.side === sideEnum.LEFT) {
-                visibleBranches[i].sprite.context.save();
-                visibleBranches[i].sprite.context.translate(branchPositionXLEFT + visibleBranches[i].sprite.width, visibleBranches[i].sprite.currentPosition.y + visibleBranches[i].sprite.height);
-                visibleBranches[i].sprite.context.rotate(Math.PI);
-                visibleBranches[i].sprite.context.translate(-branchPositionXLEFT + visibleBranches[i].sprite.width, -visibleBranches[i].sprite.currentPosition.y + visibleBranches[i].sprite.height);
-                visibleBranches[i].sprite.render(branchPositionXLEFT, visibleBranches[i].sprite.currentPosition.y + 10);
-                visibleBranches[i].sprite.context.restore();
-            } else if(visibleBranches[i].position.side === sideEnum.RIGHT)
-                visibleBranches[i].sprite.render(branchPositionXRIGHT, visibleBranches[i].sprite.currentPosition.y + 10);
+    if(ready && !gameOver) {
+        for(let i = visibleBranchesIndex; i < visibleBranches.length; i++) {
+            if(visibleBranches[i].sprite.currentPosition.y <= playerSprite.currentPosition.y + playerSprite.height / 2) { 
+                if(visibleBranches[i].position.side === sideEnum.LEFT) {
+                    visibleBranches[i].sprite.context.save();
+                    visibleBranches[i].sprite.context.translate(branchPositionXLEFT + visibleBranches[i].sprite.width, visibleBranches[i].sprite.currentPosition.y + visibleBranches[i].sprite.height);
+                    visibleBranches[i].sprite.context.rotate(Math.PI);
+                    visibleBranches[i].sprite.context.translate(-branchPositionXLEFT + visibleBranches[i].sprite.width, -visibleBranches[i].sprite.currentPosition.y + visibleBranches[i].sprite.height);
+                    visibleBranches[i].sprite.render(branchPositionXLEFT, visibleBranches[i].sprite.currentPosition.y + 10 / energy);
+                    visibleBranches[i].sprite.context.restore();
+                } else if(visibleBranches[i].position.side === sideEnum.RIGHT) {
+                    visibleBranches[i].sprite.render(branchPositionXRIGHT, visibleBranches[i].sprite.currentPosition.y + 10 / energy);
+                }
+                    
+                // Condição de perda: esmagamento!
+                if(visibleBranches[i].sprite.currentPosition.y >= playerSprite.currentPosition.y && visibleBranches[i].position.side === playerSide) 
+                    gameOver = true;
+            } else 
+                visibleBranchesIndex++;
         }
     }
 }
