@@ -3,6 +3,7 @@
  */
 var axe_sound;
 var gameover_sound;
+var time_bomb;
 
 function start() {
     loadSound();
@@ -19,13 +20,18 @@ function start() {
      // load game sound files with Howler.js
       axe_sound = new Howl({
         src: ['sound/chop2.wav'],
-        volume: 1
+        volume: 0.6
       });
 
       gameover_sound = new Howl({
         src: ['sound/fail.wav'],
-        volume: 1
+        volume: 0.5
       });
+
+      time_bomb = new Howl({
+          src: ['sound/time_bomb.mpeg'],
+          volume: 1
+      })
 
  }
 
