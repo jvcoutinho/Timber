@@ -15,7 +15,7 @@ function loop() {
         if(index < beats.length && beats[index].start <= elapsedTime / 1000) 
             index++;
         
-        // 
+        // Beat counter.
         if(tempoTime >= tempo - 0.1 && tempoTime <= tempo + 0.1) {
             beat = true;
            // console.log(true);
@@ -55,41 +55,45 @@ function restartSetup() {
 
 function draw() {
     context.clearRect(0, 0, canvas.width, canvas.height);
+    drawClouds();
     drawPlayer();
     mainTreeSprite.render(mainTreeSprite.currentPosition.x, mainTreeSprite.currentPosition.y);
     mainTreeSpriteReplicate.render(mainTreeSpriteReplicate.initialPosition.x, mainTreeSpriteReplicate.initialPosition.y);
     drawBranches();
     axeSprite.render(axeSprite.currentPosition.x, axeSprite.currentPosition.y);
     drawTimeBar();
-    drawClouds();
  }
 
  function drawClouds(){
-    cloud1.render(0, 0);
-    cloud2.render(100, 0);
-    cloud2.render(300, 0);
-    cloud4.render(500, 0);
-    cloud4.render(700, 100);
-    cloud4.render(100, 20);
-    cloud2.render(250, 50);
-    cloud1.render(50, 25);
-    cloud3.render(800, 60);
-    cloud4.render(300, 80);
-    cloud2.render(50, 150);
+
+    let jump = (beat) ? 10 : 0;
+
+    // Left.
+    cloud1.render(0, 0 + jump);
+    cloud2.render(100, 0 + jump);
+    cloud2.render(300, 0 + jump);
+    cloud4.render(500, 0  + jump);
+    cloud4.render(700, 100  + jump);
+    cloud4.render(100, 20  + jump);
+    cloud2.render(250, 50  + jump);
+    cloud1.render(50, 25  + jump);
+    cloud3.render(800, 60  + jump);
+    cloud4.render(300, 80  + jump);
+    cloud2.render(50, 150 + jump);
 
 
-
-    cloud1.render( canvas.width/2 + 0, 0);
-    cloud2.render( canvas.width/2 + 100, 0);
-    cloud2.render( canvas.width/2 + 300, 0);
-    cloud4.render( canvas.width/2 + 500, 0);
-    cloud4.render( canvas.width/2 + 700, 100);
-    cloud4.render( canvas.width/2 + 100, 20);
-    cloud2.render( canvas.width/2 + 250, 50);
-    cloud1.render( canvas.width/2 + 50, 25);
-    cloud3.render( canvas.width/2 + 800, 60);
-    cloud4.render( canvas.width/2 + 300, 80);
-    cloud2.render( canvas.width/2 + 50, 150);
+    // Right.
+    cloud1.render( canvas.width/2 + 0, 0 + jump);
+    cloud2.render( canvas.width/2 + 100, 0 + jump);
+    cloud2.render( canvas.width/2 + 300, 0 + jump);
+    cloud4.render( canvas.width/2 + 500, 0 + jump);
+    cloud4.render( canvas.width/2 + 700, 100 + jump);
+    cloud4.render( canvas.width/2 + 100, 20 + jump);
+    cloud2.render( canvas.width/2 + 250, 50 + jump);
+    cloud1.render( canvas.width/2 + 50, 25 + jump);
+    cloud3.render( canvas.width/2 + 800, 60 + jump);
+    cloud4.render( canvas.width/2 + 300, 80 + jump);
+    cloud2.render( canvas.width/2 + 50, 150 + jump);
  }
 
 function drawTimeBar() {
@@ -104,16 +108,16 @@ function drawBranches() {
     
     if(ready && !gameOver) {
         for(let i = visibleBranchesIndex; i < visibleBranches.length; i++) {
-            if(visibleBranches[i].sprite.currentPosition.y <= playerSprite.currentPosition.y + playerSprite.height / 2) { 
+            if(visibleBranches[i].sprite.currentPosition.y <= playerSprite.currentPosition.y + playerSprite.height / 2.5) { 
                 if(visibleBranches[i].position.side === sideEnum.LEFT) {
                     visibleBranches[i].sprite.context.save();
                     visibleBranches[i].sprite.context.translate(branchPositionXLEFT + visibleBranches[i].sprite.width, visibleBranches[i].sprite.currentPosition.y + visibleBranches[i].sprite.height);
                     visibleBranches[i].sprite.context.rotate(Math.PI);
                     visibleBranches[i].sprite.context.translate(-branchPositionXLEFT + visibleBranches[i].sprite.width, -visibleBranches[i].sprite.currentPosition.y + visibleBranches[i].sprite.height);
-                    visibleBranches[i].sprite.render(branchPositionXLEFT, visibleBranches[i].sprite.currentPosition.y + 10 / energy);
+                    visibleBranches[i].sprite.render(branchPositionXLEFT, visibleBranches[i].sprite.currentPosition.y + 6 / energy);
                     visibleBranches[i].sprite.context.restore();
                 } else if(visibleBranches[i].position.side === sideEnum.RIGHT) {
-                    visibleBranches[i].sprite.render(branchPositionXRIGHT, visibleBranches[i].sprite.currentPosition.y + 10 / energy);
+                    visibleBranches[i].sprite.render(branchPositionXRIGHT, visibleBranches[i].sprite.currentPosition.y + 6 / energy);
                 }
                     
                 // Condição de perda: esmagamento!

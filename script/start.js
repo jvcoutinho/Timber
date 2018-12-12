@@ -41,10 +41,8 @@ function start() {
 function loadTextures() {
     
     // Árvore principal.
-    mainTreeSprite = loadSprite("images/tree.png", 300, 900, canvas.width / 2 - 100, 140);
+    mainTreeSprite = loadSprite("images/tree.png", 300, 900, canvas.width / 2 - 100, canvas.height - 700);
     mainTreeSpriteReplicate = loadSprite("images/tree.png", 300, 900, canvas.width / 2 - 100, 0);
-
-    
 
     // Jogador.
     playerPositionXLEFT = mainTreeSprite.initialPosition.x - 100;
@@ -150,7 +148,7 @@ ready = false;
 function createBranchPositions(beats, tempo) {
     ready = false;
     for (let i = 0; i < beats.length; i++) {
-        branchSprites.push(loadSprite("images/branch.png", 440, 80, 2000, 0));
+        branchSprites.push(loadSprite("images/branch.png", 440, 80, 2000, -i * 50));
         let position = Math.floor(Math.random() * 2);   
         switch(position) {
             case 0:

@@ -1,5 +1,5 @@
 var spotifyAPI = new SpotifyWebApi();
-spotifyAPI.setAccessToken("BQAi16DRMvScGvd6ejim1MHq1ghJJUgDTCP3u85LpGB7cvWroc_7S6On1J76ETdhhkZQSRLiiSC1ldlurY8mxoTSDhxG4zsaVribF3AxPAKuMOAhHnnTENisBwbRI_Ey42NwkunpkR7L0j6StNwl6GLLPVA");
+spotifyAPI.setAccessToken("BQDt3hQU4BLtBFFXkTBspA6--cthp5cEBRVXIxA94_Sr0gFcbv7vspYtRrMhP3vODng2uJvKXoWocMRk6hwiRXo8a6EG33m6VUflGSe18YqLnhEhibyJ2L-7uEO9HOc95v8l4-76nqrfIBRoksQaoU_F");
 
 function loadMusic(id) {
     beats = [];
@@ -19,6 +19,7 @@ function loadMusic(id) {
                     //console.log(tempo, beats);
                     createBranchPositions(beats, tempo);
                     time_bomb.play();
+                    currentTime = Date.now();
                     gameOver = false;
                 }
             });
