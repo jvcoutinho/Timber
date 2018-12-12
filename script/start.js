@@ -137,6 +137,8 @@ function setGameVariables() {
     // Fluxo de jogo.
     gameOver = true;
     beat = true;
+    score = 0;
+    branchSpeed = 0;
 
 }
 

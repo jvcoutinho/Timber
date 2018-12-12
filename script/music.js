@@ -20,6 +20,7 @@ function loadMusic(id) {
                     createBranchPositions(beats, tempo);
                     time_bomb.play();
                     currentTime = Date.now();
+                    branchSpeed = 6 / energy;
                     gameOver = false;
                 }
             });

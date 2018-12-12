@@ -62,6 +62,7 @@ function draw() {
     drawBranches();
     axeSprite.render(axeSprite.currentPosition.x, axeSprite.currentPosition.y);
     drawTimeBar();
+    updateScore();
  }
 
  function drawClouds(){
@@ -114,17 +115,19 @@ function drawBranches() {
                     visibleBranches[i].sprite.context.translate(branchPositionXLEFT + visibleBranches[i].sprite.width, visibleBranches[i].sprite.currentPosition.y + visibleBranches[i].sprite.height);
                     visibleBranches[i].sprite.context.rotate(Math.PI);
                     visibleBranches[i].sprite.context.translate(-branchPositionXLEFT + visibleBranches[i].sprite.width, -visibleBranches[i].sprite.currentPosition.y + visibleBranches[i].sprite.height);
-                    visibleBranches[i].sprite.render(branchPositionXLEFT, visibleBranches[i].sprite.currentPosition.y + 6 / energy);
+                    visibleBranches[i].sprite.render(branchPositionXLEFT, visibleBranches[i].sprite.currentPosition.y + branchSpeed);
                     visibleBranches[i].sprite.context.restore();
                 } else if(visibleBranches[i].position.side === sideEnum.RIGHT) {
-                    visibleBranches[i].sprite.render(branchPositionXRIGHT, visibleBranches[i].sprite.currentPosition.y + 6 / energy);
+                    visibleBranches[i].sprite.render(branchPositionXRIGHT, visibleBranches[i].sprite.currentPosition.y + branchSpeed);
                 }
                     
                 // Condição de perda: esmagamento!
                 if(visibleBranches[i].sprite.currentPosition.y >= playerSprite.currentPosition.y && visibleBranches[i].position.side === playerSide) 
                     gameOver = true;
-            } else 
+            } else {
                 visibleBranchesIndex++;
+                score++;
+            }
         }
     }
 }
@@ -134,4 +137,10 @@ function drawPlayer() {
         playerSprite.render(playerPositionXLEFT, playerSprite.currentPosition.y);
     else if(playerSide === sideEnum.RIGHT)
         playerSprite.render(playerPositionXRIGHT, playerSprite.currentPosition.y);
+}
+
+function updateScore() {
+    scoreDIV.innerHTML = "SCORE: " + score;
+    branchSpeed += 0.00001 * score;
+    INITIAL_TIME -= 0.00001 * score;
 }
