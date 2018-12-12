@@ -1,8 +1,39 @@
+/**
+ * Global Sound Variables to be loaded later
+ */
+var axe_sound;
+var gameover_sound;
+var time_bomb;
+
 function start() {
+    loadSound();
     loadTextures();
     handleInput();
     setGameVariables();
 }
+
+/**
+ * Carregar Arquivos de Som
+ */
+
+ function loadSound(){
+     // load game sound files with Howler.js
+      axe_sound = new Howl({
+        src: ['sound/chop2.wav'],
+        volume: 0.6
+      });
+
+      gameover_sound = new Howl({
+        src: ['sound/fail.wav'],
+        volume: 0.5
+      });
+
+      time_bomb = new Howl({
+          src: ['sound/time_bomb.mpeg'],
+          volume: 1
+      })
+
+ }
 
 /**
  * Carregar texturas.
@@ -12,6 +43,8 @@ function loadTextures() {
     // Árvore principal.
     mainTreeSprite = loadSprite("images/tree.png", 300, 900, canvas.width / 2 - 100, 140);
     mainTreeSpriteReplicate = loadSprite("images/tree.png", 300, 900, canvas.width / 2 - 100, 0);
+
+    
 
     // Jogador.
     playerPositionXLEFT = mainTreeSprite.initialPosition.x - 100;
@@ -30,6 +63,12 @@ function loadTextures() {
     branchPositions = [];
     visibleBranches = [];
     visibleBranchesIndex = 0;
+
+    // Nuvens.
+    cloud1 = loadSprite("images/Cloud1.png", 174, 157, 0, 0);
+    cloud2 = loadSprite("images/Cloud2.png", 238, 128, 0, 0);
+    cloud3 = loadSprite("images/Cloud3.png", 190, 118, 0, 0);
+    cloud4 = loadSprite("images/Cloud4.png", 512, 211, 0, 0);
     
 }
 /**
@@ -50,6 +89,7 @@ function handleInput() {
                     axeSprite.updatePosition(axePositionXRIGHT, axeSprite.currentPosition.y);
                     timeRemaining += (beat) ? 1000 : 150;
                     timeRemaining = Math.min(timeRemaining, INITIAL_TIME);
+                    axe_sound.play();
                     break;
 
                 case 37: // <-
@@ -58,10 +98,12 @@ function handleInput() {
                     axeSprite.updatePosition(axePositionXLEFT, axeSprite.currentPosition.y);
                     timeRemaining += (beat) ? 1000 : 150;
                     timeRemaining = Math.min(timeRemaining, INITIAL_TIME);
+                    axe_sound.play();
                     break;
 
                 default:
                     break;
+                    
 
             }
 
