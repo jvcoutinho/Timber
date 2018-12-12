@@ -84,7 +84,7 @@ function setGameVariables() {
     playerSide = sideEnum.LEFT;
 
     // Tempo.
-    INITIAL_TIME = 2000.0;
+    INITIAL_TIME = 4000.0;
     timeBarStartDimensions = {width: 400, height: 30};
     timeRemaining = INITIAL_TIME; //milisseconds;
     timeDecreaseSpeed = timeBarStartDimensions.width / timeRemaining;
@@ -97,6 +97,7 @@ function setGameVariables() {
     // Fluxo de jogo.
     gameOver = true;
     beat = true;
+    clap = false;
 
 }
 

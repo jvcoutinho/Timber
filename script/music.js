@@ -1,5 +1,5 @@
 var spotifyAPI = new SpotifyWebApi();
-spotifyAPI.setAccessToken("BQC5K_jj0jFGr4WgrOayHWBHKC9E3w7ENwbFshaFXgzWcXDUjb-AHKyWiglsabqY5LdEkbDaqDburUcrUwdz4Gin7n2ZoQXkcLkJnYgpqg1VOwNMe3_15QPDf-_sQmlZpcYmLP7MP9tIEJVbyC-VB_nI");
+spotifyAPI.setAccessToken("BQCNuyAI1HW3OgU974Px2VqZqYi9y6i1or4-dG6QR6dFULLtIrF3hnFyJ7FEoLpt49ykBSbYMhrBV1P0thP4G08HCQfURxJySPIPxcblOkI2CvUORHulAx_iJpR9nvLZ2nGqW7WBMbtpWN8i_igSzAzY");
 
 function loadMusic(id) {
     beats = [];

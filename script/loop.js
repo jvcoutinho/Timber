@@ -80,10 +80,10 @@ function drawBranches() {
                     visibleBranches[i].sprite.context.translate(branchPositionXLEFT + visibleBranches[i].sprite.width, visibleBranches[i].sprite.currentPosition.y + visibleBranches[i].sprite.height);
                     visibleBranches[i].sprite.context.rotate(Math.PI);
                     visibleBranches[i].sprite.context.translate(-branchPositionXLEFT + visibleBranches[i].sprite.width, -visibleBranches[i].sprite.currentPosition.y + visibleBranches[i].sprite.height);
-                    visibleBranches[i].sprite.render(branchPositionXLEFT, visibleBranches[i].sprite.currentPosition.y + 10 / energy);
+                    visibleBranches[i].sprite.render(branchPositionXLEFT, visibleBranches[i].sprite.currentPosition.y + 4 / energy);
                     visibleBranches[i].sprite.context.restore();
                 } else if(visibleBranches[i].position.side === sideEnum.RIGHT) {
-                    visibleBranches[i].sprite.render(branchPositionXRIGHT, visibleBranches[i].sprite.currentPosition.y + 10 / energy);
+                    visibleBranches[i].sprite.render(branchPositionXRIGHT, visibleBranches[i].sprite.currentPosition.y + 4 / energy);
                 }
                     
                 // Condição de perda: esmagamento!
