@@ -38,6 +38,8 @@ function loadTextures() {
     mainTreeSprite = loadSprite("images/tree.png", 300, 900, canvas.width / 2 - 100, 140);
     mainTreeSpriteReplicate = loadSprite("images/tree.png", 300, 900, canvas.width / 2 - 100, 0);
 
+    
+
     // Jogador.
     playerPositionXLEFT = mainTreeSprite.initialPosition.x - 100;
     playerPositionXRIGHT = mainTreeSprite.initialPosition.x + 180;
@@ -55,6 +57,12 @@ function loadTextures() {
     branchPositions = [];
     visibleBranches = [];
     visibleBranchesIndex = 0;
+
+    // Nuvens.
+    cloud1 = loadSprite("images/Cloud1.png", 174, 157, 0, 0);
+    cloud2 = loadSprite("images/Cloud2.png", 238, 128, 0, 0);
+    cloud3 = loadSprite("images/Cloud3.png", 190, 118, 0, 0);
+    cloud4 = loadSprite("images/Cloud4.png", 512, 211, 0, 0);
     
 }
 /**
