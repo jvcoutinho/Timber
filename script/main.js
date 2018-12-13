@@ -21,6 +21,8 @@ function resize() {
 
 window.addEventListener('load', resize, false);
 window.addEventListener('resize', resize, false);
+var scoreDIV = document.querySelector("#score");
+
 start();
-loadMusic('3ud0rVJAHfuPghaTw4WOUC');
+loadMusic('6U7VUPf8d3K1dY0UNMdDXS');
 setTimeout(loop, 60);

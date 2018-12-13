@@ -12,3 +12,12 @@ body {
     overflow-y: hidden;
     border: 0px solid white
 }
+
+#score {
+    position: absolute;
+    z-index: 2;
+    bottom: 0%;
+    right: 2%;
+    color: white;
+    font: 2.5em Arial;
+}
