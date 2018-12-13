@@ -41,7 +41,7 @@ function start() {
 function loadTextures() {
     
     // Árvore principal.
-    mainTreeSprite = loadSprite("images/tree.png", 300, 900, canvas.width / 2 - 100, canvas.height - 700);
+    mainTreeSprite = loadSprite("images/tree.png", 300, 900, canvas.width / 2 - 100, canvas.height - 510);
     mainTreeSpriteReplicate = loadSprite("images/tree.png", 300, 900, canvas.width / 2 - 100, 0);
 
     // Jogador.
