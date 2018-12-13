@@ -43,6 +43,8 @@ function loop() {
             
     } else {
         currentTime = Date.now();
+        
+            time_bomb.stop();
     }
     restartSetup();
     draw();

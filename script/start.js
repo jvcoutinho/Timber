@@ -85,7 +85,7 @@ function handleInput() {
                     playerSide = sideEnum.RIGHT;
                     // playerSprite.updatePosition(playerPositionXRIGHT, playerSprite.currentPosition.y);
                     axeSprite.updatePosition(axePositionXRIGHT, axeSprite.currentPosition.y);
-                    timeRemaining += (beat) ? 1000 : 150;
+                    timeRemaining += (beat) ? 1000 : 200;
                     timeRemaining = Math.min(timeRemaining, INITIAL_TIME);
                     axe_sound.play();
                     break;
@@ -94,7 +94,7 @@ function handleInput() {
                     playerSide = sideEnum.LEFT;
                     // playerSprite.updatePosition(playerPositionXLEFT, playerSprite.currentPosition.y);
                     axeSprite.updatePosition(axePositionXLEFT, axeSprite.currentPosition.y);
-                    timeRemaining += (beat) ? 1000 : 150;
+                    timeRemaining += (beat) ? 1000 : 200;
                     timeRemaining = Math.min(timeRemaining, INITIAL_TIME);
                     axe_sound.play();
                     break;
@@ -124,7 +124,7 @@ function setGameVariables() {
     playerSide = sideEnum.LEFT;
 
     // Tempo.
-    INITIAL_TIME = 4000.0;
+    INITIAL_TIME = 6000.0;
     timeBarStartDimensions = {width: 400, height: 30};
     timeRemaining = INITIAL_TIME; //milisseconds;
     timeDecreaseSpeed = timeBarStartDimensions.width / timeRemaining;
