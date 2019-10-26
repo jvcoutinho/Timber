@@ -1,3 +1,9 @@
+
+console.log("Entrou no arquivo do start");
+
+function start() {
+    console.log("Entrou no Start");
+
 /**
  * Global Sound Variables to be loaded later
  */
@@ -55,6 +61,16 @@ function loadTextures() {
     axeSprite = loadSprite("images/axe.png", 152, 28, axePositionXLEFT, canvas.height/2 + 195);
 
     // Galhos.
+    const NUM_GALHOS = 6;
+    var branchImage = loadTexture("images/branch.png");
+    branchPositionXLEFT = playerSprite.initialPosition.x + 100;
+    branchPositionXRIGHT = playerSprite.initialPosition.x + 100;
+    branchPositions = [];
+    for (let index = 0; index < NUM_GALHOS; index++)
+    branchPositions.push(loadSprite(branchImage, -2000, -2000));
+    //Juliano: branchImage é pra ser url da image, justo?
+    
+}
     branchPositionXLEFT = mainTreeSprite.initialPosition.x;
     branchPositionXRIGHT = mainTreeSprite.initialPosition.x + 144;
     branchSprites = [];
@@ -74,7 +90,10 @@ function loadTextures() {
  */
 function handleInput() {
     document.addEventListener("keydown", e => {
+        
 
+        if(acceptInput) {
+           //juliano : Ou chamaria updateBranches aqui? Toda vez q ele pressionasse. 
         if(acceptInput && !gameOver) {
             let key = e.which || e.keyCode;
 
@@ -85,6 +104,7 @@ function handleInput() {
                     playerSide = sideEnum.RIGHT;
                     // playerSprite.updatePosition(playerPositionXRIGHT, playerSprite.currentPosition.y);
                     axeSprite.updatePosition(axePositionXRIGHT, axeSprite.currentPosition.y);
+                   //juliano :Ou chamaria updateBranches aqui? Toda vez q ele pressionasse. 
                     timeRemaining += (beat) ? 1000 : 150;
                     timeRemaining = Math.min(timeRemaining, INITIAL_TIME);
                     axe_sound.play();
@@ -94,12 +114,14 @@ function handleInput() {
                     playerSide = sideEnum.LEFT;
                     // playerSprite.updatePosition(playerPositionXLEFT, playerSprite.currentPosition.y);
                     axeSprite.updatePosition(axePositionXLEFT, axeSprite.currentPosition.y);
+                    //juliano : Ou chamaria updateBranches aqui? Toda vez q ele pressionasse.
                     timeRemaining += (beat) ? 1000 : 150;
                     timeRemaining = Math.min(timeRemaining, INITIAL_TIME);
                     axe_sound.play();
                     break;
 
                 default:
+                //juliano : chamaria updateBranches aqui? Toda vez q ele pressionasse.
                     break;
                     
 
@@ -113,6 +135,9 @@ function handleInput() {
 
     document.addEventListener("keyup", () => {
         axeSprite.updatePosition(2000, axeSprite.currentPosition.y); 
+        //juliano: O ideal talvez fosse que colocasse o ganho aqui, quando ele para de pressionar a tecla.
+        //juliano: Acredito que é aqui que fica todas as funcoes de atualizar o galho, assim, como ta atualizando ai
+        //juliano: a posicao do machado.
     })
 }
 
@@ -120,6 +145,12 @@ function handleInput() {
  * Setar as variáveis do jogo.
  */
 function setGameVariables() {
+    playerSideEnum = Object.freeze({"LEFT": 1, "RIGHT": 2});//Juliano: Tem que ver aqui como vai ser essa captura, se vai ser pelo rotulo 
+                                                            //"LEFT e RIGHT la no switche, no caso como strings, ou se coloca lá a saida pra 1 e 2...
+}
+
+
+
     sideEnum = Object.freeze({"LEFT": 1, "RIGHT": 2, "NONE": 3});
     playerSide = sideEnum.LEFT;
 

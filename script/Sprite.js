@@ -76,3 +76,32 @@ function createSprite (options) {
 
     return sprite;
 }
+
+function updateBranches() {
+    NUM_BRANCHES = 6 //ja existe uma var chamada assim em outro arquivo.
+    console.log("Entrou no updateBranches");
+    for (j = NUM_BRANCHES - 1; j > 0; j--)
+	{
+		branchPositions[j] = branchPositions[j - 1];
+	}
+
+	// Spawn a new branch at position 0   
+	// LEFT, RIGHT or NONE   
+	r = Math.floor(Math.random() * 4);
+	
+	switch (r)
+        {
+        case 0:
+            branchPositions[0] = "LEFT";
+            break;
+
+        case 1:
+            branchPositions[0] = "RIGHT";
+            break;
+               
+        default:
+            break;
+        }
+
+
+}
