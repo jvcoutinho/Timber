@@ -42,6 +42,7 @@ function createSprite (options) {
 
     sprite.render = function(x, y) {
 
+
         sprite.context.drawImage(
             sprite.image, // Image.
             0, // Coordenada x da área.
@@ -50,8 +51,8 @@ function createSprite (options) {
             sprite.height, // Altura da área.
             x, // Coordenada x da tela para desenhar a imagem.
             y, // Coordenada y da tela para desenhar a imagem.
-            sprite.width, // Largura da imagem.
-            sprite.height // Altura da imagem.
+            sprite.resize().x, // Largura da imagem.
+            sprite.resize().y // Altura da imagem.
         );
 
         sprite.currentPosition = {
@@ -64,6 +65,13 @@ function createSprite (options) {
     sprite.updatePosition = function(x, y) {
         sprite.context.clearRect(sprite.currentPosition.x, sprite.currentPosition.y, sprite.width, sprite.height);
         sprite.render(x, y);
+    }
+
+    sprite.resize = function() {
+        let ratio = canvas.width/canvas.height;
+        let width = sprite.width / ratio;
+        let height = sprite.height / ratio;  
+        return {x: width, y: height};
     }
 
     return sprite;

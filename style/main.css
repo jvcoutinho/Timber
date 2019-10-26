@@ -5,11 +5,19 @@ body {
 
 #canvas {
     background-image: url("../images/background.png");
-    background-attachment: fixed;
     background-size: cover;
     min-width: 0;
     max-height:max-content;
     position: absolute;
     overflow-y: hidden;
     border: 0px solid white
+}
+
+#score {
+    position: absolute;
+    z-index: 2;
+    bottom: 0%;
+    right: 2%;
+    color: white;
+    font: 2.5em Arial;
 }
